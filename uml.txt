@@ -1,0 +1,68 @@
+@startuml
+class Cabinet {
+-pm : PrimeMinister
+-ministers : List<Minister> 
++Cabinet(pm : PrimeMinister)
+-countMinisters() : int
++addMinister(minister : Minister) : void
++removeMinister(minister : Minister) : void
+}
+
+class MemberOfParliament {
++debate(topic : String) : void
++vote() : Boolean
+}
+class Minister {
+-ministry : String
++debate(topic : String) : void
++order() : String
+}
+interface OrderIssuable{
++order() : String
+}
+
+class Parliament {
+-{static}parliament : Parliament
+-members : List<MemberOfParliament>
+-pm : PrimeMinister
++Parliament()
++{static}getInstance() : Parliament
++countMembers() : int
++addMember() : void
++electPrimeMinister() : PrimeMinister
+}
+
+abstract Politician {
+#name : String
+{abstract}debate(topic : String) : void
++getName() : String
++setName(name : String) : void
+}
+
+class PrimeMinister {
+-parliament : Parliament
+-cabinet : Cabinet
++PrimeMinister(parliament : Parliament)
++getCable() : Cabinet
++addMinister(ministry : String) : void
++removeMinister(minister : Minister)
++debate(topic : String) : void
++order() : String
+}
+
+Minister ..|> OrderIssuable
+PrimeMinister ..|> OrderIssuable
+
+MemberOfParliament --|> Politician
+PrimeMinister --|> Politician
+Minister --|> Politician
+
+Cabinet --- PrimeMinister
+Cabinet --> Minister  : 0..34
+
+Parliament --> Parliament : 0..1
+Parliament --> MemberOfParliament : 0..499
+
+
+PrimeMinister --- Parliament
+@enduml
