@@ -1,4 +1,4 @@
-package edu.parinya.softarchdesign.behavioral;
+
 
 public enum NewsTopic {
     ECONOMIC("ECONOMIC"),
